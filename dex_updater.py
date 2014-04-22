@@ -8,6 +8,7 @@ import re
 import sys
 import socket
 import string
+import HTMLParser
 from login import *
 from var_keys import *
 from aliases import *
@@ -49,8 +50,9 @@ def already_replied(parent_comment, bot_name):
    return False
 
 def add_set_to_page(pokemon_page, info, set_text, author):
-   set_text = set_text.replace("###", "")
-   set_text = set_text.replace("##", "")
+   set_text = re.sub(r"^###","", set_text)
+   set_text = re.sub(r"^##","", set_text)
+   set_text = re.sub(r"^#","", set_text)
    old_poke_content = pokemon_page.content_md
    page_split = old_poke_content.split("##Nature", 1)
    if len(page_split) == 1:
@@ -139,8 +141,8 @@ while (keep_on):
                continue
             print ("We are currently considering a comment that is " + str(time.time() - parent_comment.created_utc) + " seconds old, from " + str(parent_comment.subreddit))
             text = unicode(parent_comment.body)
-            text = text.replace("&gt;",">")
-            text = text.replace("&lt;","<")
+            h = HTMLParser.HTMLParser()
+            text = h.unescape(text)
             print text
             print ("We are now editing the Wiki page for " + info["species"])
             try:
