@@ -9,3 +9,4 @@ USERNAME and PASSWORD with your reddit username and password. To generate the
 Pokedex index, run generate_dex_index.py. To run the bot, run dex_updater.py.
 
 The list of approved submitters is in approved_submitters.py.
+Approved posts must be in the format: APPROVED SET | POKEMON: [name] | SET NAME: [set name]
