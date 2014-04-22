@@ -78,7 +78,15 @@ To be completed - a section about the best moves for {species}.
 
 To be completed - a section about the best strategies for {species}.
 
-## Breeding Requirements
+##Team mates
+
+To be completed - a section about the best team mates for {species}.
+
+##Checks and counters
+
+To be completed - a section about the checks and counters for {species}.
+
+##Breeding Requirements
 
 ###Egg Moves
 
