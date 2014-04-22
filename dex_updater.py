@@ -20,7 +20,8 @@ from approved_submitters import APPROVED_SUBMITTERS
 
 # Checks for an approving post
 def approving_post(comment):
-   text = unicode(comment.body)
+   text = comment.body.encode('ascii', 'ignore')
+   text = unicode(text)
    approving_pattern = re.compile(r"\s*approved set\s*\|\s*pokemon:\s*(\w[\w.' -]+)\s*\|\s*set name:\s*(\w[\w.' -]+).*", re.I)
    match = re.match(approving_pattern, text)
    if not match:
@@ -144,7 +145,8 @@ while (keep_on):
             if already_replied(parent_comment, username):
                continue
             print ("We are currently considering a comment that is " + str(time.time() - parent_comment.created_utc) + " seconds old, from " + str(parent_comment.subreddit))
-            text = unicode(parent_comment.body)
+            text = parent_comment.body.encode('ascii', 'ignore')
+            text = unicode(text)
             h = HTMLParser.HTMLParser()
             text = h.unescape(text)
             print text
