@@ -54,6 +54,8 @@ def add_set_to_page(pokemon_page, info, set_text, author):
    set_text = re.sub(r"^##","", set_text)
    set_text = re.sub(r"^#","", set_text)
    old_poke_content = pokemon_page.content_md
+   h = HTMLParser.HTMLParser()
+   old_poke_content = h.unescape(old_poke_content)
    page_split = old_poke_content.split("##Nature", 1)
    if len(page_split) == 1:
       return
@@ -76,6 +78,8 @@ Submitted by /u/{author}
 
 def update_pokedex_index(pokedex_index, species):
    index_contents = pokedex_index.content_md
+   h = HTMLParser.HTMLParser()
+   index_contents = h.unescape(index_contents)
    bold_species = "**" + species + "**"
    if not bold_species in index_contents:
       index_contents = index_contents.replace(species, bold_species, 1) # Limit to 1 to prevent updating different formes

@@ -9,6 +9,7 @@ import sys
 import socket
 import string
 import urllib2
+import HTMLParser
 from login import *
 from var_keys import *
 from aliases import *
@@ -44,6 +45,8 @@ Pokémon|Type|Abilities|HP|Atk|Def|SpA|SpD|Spe|BST
       try:
          pokemon_page = subreddit.get_wiki_page(page=stunfisk_dex_index)
          old_poke_content = pokemon_page.content_md
+         h = HTMLParser.HTMLParser()
+         old_poke_content = h.unescape(old_poke_content)
       except:
          old_poke_content = ""
       new_poke_content = """\
