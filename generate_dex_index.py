@@ -89,7 +89,11 @@ To be completed - a section about the best team mates for {species}.
 
 To be completed - a section about the checks and counters for {species}.
 
-##Breeding Requirements
+##Move Requirements
+
+###Tutor Moves
+
+To be completed - a section about the tutor moves to be aware of while breeding.
 
 ###Egg Moves
 
@@ -156,4 +160,4 @@ stunfisk = r.get_subreddit('stunfisk')
 stunfisktest = r.get_subreddit('stunfiskpokedextest')
 stunfisktest2 = r.get_subreddit('stunfiskCSS')
 me = praw.objects.Redditor(r, user_name=username)
-generate_base_pokedex(stunfisktest2, "stunfiskCSS")
+generate_base_pokedex(stunfisktest, "stunfiskpokedextest")

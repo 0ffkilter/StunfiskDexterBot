@@ -75,7 +75,8 @@ Submitted by /u/{author}
    set_text=set_text,
    old_post_content=page_split[1],
    author=author)
-   pokemon_page.edit(content=new_poke_content)
+   reason = "Adding a new set called {set_name}".format(set_name=info["set_name"])
+   pokemon_page.edit(content=new_poke_content, reason=reason)
 
 def update_pokedex_index(pokedex_index, species):
    index_contents = pokedex_index.content_md
@@ -84,7 +85,8 @@ def update_pokedex_index(pokedex_index, species):
    bold_species = "**" + species + "**"
    if not bold_species in index_contents:
       index_contents = index_contents.replace(species, bold_species, 1) # Limit to 1 to prevent updating different formes
-   pokedex_index.edit(content=index_contents)
+      reason = "Updating {species} to bold font because a set has been added.".format(species=species)
+      pokedex_index.edit(content=index_contents, reason=reason)
 
 def approved_submitter(username):
    return username in APPROVED_SUBMITTERS
