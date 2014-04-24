@@ -99,6 +99,14 @@ To be completed - a section about the tutor moves to be aware of while breeding.
 
 To be completed - a section about the egg moves to be aware of while breeding.
 
+###Event Moves
+
+To be completed - a section about the egg moves to be aware of while breeding.
+
+###Past Generation Moves
+
+To be completed - a section about the egg moves to be aware of while breeding.
+
 ##Conclusion
 
 To be completed: the conclusion
