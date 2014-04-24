@@ -22,7 +22,7 @@ from approved_submitters import APPROVED_SUBMITTERS
 def approving_post(comment):
    text = comment.body.encode('ascii', 'ignore')
    text = unicode(text)
-   approving_pattern = re.compile(r"\s*approved set\s*\|\s*pokemon:\s*(\w[\w.' -]+)\s*\|\s*set name:\s*(\w[\w.' -]+).*", re.I)
+   approving_pattern = re.compile(r"\s*approved set\s*\|\s*pokemon:\s*(\w[\w.' -]+)\s*\|\s*set name:\s*([\w.!;\(\)/' +-]+).*", re.I)
    match = re.match(approving_pattern, text)
    if not match:
       return None
