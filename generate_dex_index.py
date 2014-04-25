@@ -101,11 +101,11 @@ To be completed - a section about the egg moves to be aware of while breeding.
 
 ###Event Moves
 
-To be completed - a section about the egg moves to be aware of while breeding.
+To be completed - a section about moves that can only be obtained through events.
 
 ###Past Generation Moves
 
-To be completed - a section about the egg moves to be aware of while breeding.
+To be completed - a section about moves that can only be obtained through past generations.
 
 ##Conclusion
 
