@@ -60,7 +60,7 @@ def add_set_to_page(pokemon_page, info, set_text, author):
       return
    new_poke_content = """{old_pre_content}
 
-###{set_name}
+###[{set_name}]({permalink})
 
 {set_text}
 
@@ -70,6 +70,7 @@ Submitted by /u/{author}
    new_poke_content = new_poke_content.format(
    old_pre_content=page_split[0],
    set_name=info["set_name"],
+   permalink=info["permalink"],
    set_text=set_text,
    old_post_content=page_split[1],
    author=author)
@@ -95,8 +96,8 @@ r = praw.Reddit(user_agent = user_agent)
 r.login(username = username, password = password)
 stunfisk = r.get_subreddit('stunfisk')
 #stunfisktest = r.get_subreddit('stunfiskpokedextest')
-#stunfisktest2 = r.get_subreddit('stunfiskCSS')
-subreddit = stunfisk
+stunfisktest2 = r.get_subreddit('stunfiskCSS')
+subreddit = stunfisktest2
 me = praw.objects.Redditor(r, user_name=username)
 keep_on = True
 
@@ -145,6 +146,7 @@ while (keep_on):
                continue
             parent_comment = r.get_info(thing_id=c.parent_id)
             parent_comment = r.get_submission(parent_comment.permalink).comments[0]
+            info["permalink"] = parent_comment.permalink
             if already_replied(parent_comment, username):
                continue
             print ("We are currently considering a comment that is " + str(time.time() - parent_comment.created_utc) + " seconds old, from " + str(parent_comment.subreddit))
