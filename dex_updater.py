@@ -154,8 +154,10 @@ while (keep_on):
             print text
             print ("We are now editing the Wiki page for " + info["species"])
             try:
+               r.evict("http://www.reddit.com/r/stunfisk/wiki/" + info["stunfisk_dex_index"])
                pokemon_page = subreddit.get_wiki_page(page=info["stunfisk_dex_index"])
                add_set_to_page(pokemon_page, info, text, parent_comment.author.name)
+               r.evict("http://www.reddit.com/r/stunfisk/wiki/pokedex")
                pokedex_index = subreddit.get_wiki_page(page="pokedex")
                update_pokedex_index(pokedex_index, info["species"])
                reply_text = """\
