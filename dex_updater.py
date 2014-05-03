@@ -97,10 +97,10 @@ archive_dir = source_dir + "mail_sack" + os.sep
 user_agent = "Updating Stunfisk Pokedex pages with user input by /u/veeveearnh"
 r = praw.Reddit(user_agent = user_agent)
 r.login(username = username, password = password)
-#stunfisk = r.get_subreddit('stunfisk')
+stunfisk = r.get_subreddit('stunfisk')
 #stunfisktest = r.get_subreddit('stunfiskpokedextest')
-stunfisktest2 = r.get_subreddit('stunfiskCSS')
-subreddit = stunfisktest2
+#stunfisktest2 = r.get_subreddit('stunfiskCSS')
+subreddit = stunfisk
 me = praw.objects.Redditor(r, user_name=username)
 keep_on = True
 
