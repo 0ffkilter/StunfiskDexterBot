@@ -54,10 +54,7 @@ def add_set_to_page(pokemon_page, info, set_text, author):
    set_text = re.sub(r"^###","", set_text)
    set_text = re.sub(r"^##","", set_text)
    set_text = re.sub(r"^#","", set_text)
-   old_poke_content = pokemon_page.content_md
-   h = HTMLParser.HTMLParser()
-   old_poke_content = h.unescape(old_poke_content)
-   page_split = old_poke_content.split("##Nature", 1)
+   page_split = pokemon_page["content"].split("##Nature", 1)
    if len(page_split) == 1:
       return
    new_poke_content = """{old_pre_content}
@@ -76,17 +73,15 @@ Submitted by /u/{author}
    old_post_content=page_split[1],
    author=author)
    reason = "Adding a new set called {set_name}".format(set_name=info["set_name"])
-   pokemon_page.edit(content=new_poke_content, reason=reason)
+   pokemon_page["page"].edit(content=new_poke_content, reason=reason)
+   pokemon_page["content"] = new_poke_content
 
 def update_pokedex_index(pokedex_index, species):
-   index_contents = pokedex_index.content_md
-   h = HTMLParser.HTMLParser()
-   index_contents = h.unescape(index_contents)
    bold_species = "**" + species + "**"
-   if not bold_species in index_contents:
-      index_contents = index_contents.replace(species, bold_species, 1) # Limit to 1 to prevent updating different formes
+   if not bold_species in pokedex_index["content"]:
+      pokedex_index["content"] = pokedex_index["content"].replace(species, bold_species, 1) # Limit to 1 to prevent updating different formes
       reason = "Updating {species} to bold font because a set has been added.".format(species=species)
-      pokedex_index.edit(content=index_contents, reason=reason)
+      pokedex_index["page"].edit(content=pokedex_index["content"], reason=reason)
 
 def approved_submitter(username):
    return username in APPROVED_SUBMITTERS
@@ -130,6 +125,11 @@ while (keep_on):
 
    try:
       for c in sorted(comments, key=lambda comment: comment.created_utc):
+         h = HTMLParser.HTMLParser()
+         pokedex_index = {}
+         pokedex_index["page"] = subreddit.get_wiki_page(page="pokedex")
+         pokedex_index["content"] = h.unescape(pokedex_index["page"].content_md)
+         edited_pages = {}
          try:
             retrieved_count += 1
             # skip posts older than our previous "newest post" timestamp
@@ -154,11 +154,13 @@ while (keep_on):
             print text
             print ("We are now editing the Wiki page for " + info["species"])
             try:
-               r.evict("http://www.reddit.com/r/stunfisk/wiki/" + info["stunfisk_dex_index"])
-               pokemon_page = subreddit.get_wiki_page(page=info["stunfisk_dex_index"])
-               add_set_to_page(pokemon_page, info, text, parent_comment.author.name)
-               r.evict("http://www.reddit.com/r/stunfisk/wiki/pokedex")
-               pokedex_index = subreddit.get_wiki_page(page="pokedex")
+               if not info["stunfisk_dex_index"] in edited_pages:
+                  edited_pages[info["stunfisk_dex_index"]] = {}
+                  edited_pages[info["stunfisk_dex_index"]]["page"] = subreddit.get_wiki_page(page=info["stunfisk_dex_index"])
+                  edited_pages[info["stunfisk_dex_index"]]["content"] = h.unescape(
+                        edited_pages[info["stunfisk_dex_index"]]["page"].content_md)
+               add_set_to_page(edited_pages[info["stunfisk_dex_index"]], 
+                     info, text, parent_comment.author.name)
                update_pokedex_index(pokedex_index, info["species"])
                reply_text = """\
 The /r/Stunfisk [Pokedex](http://www.reddit.com/r/{subreddit}/wiki/pokedex) has been updated on the [{species}](http://www.reddit.com/r/{subreddit}/wiki/{stunfisk_dex_index}) page with the new set called {set_name}.
