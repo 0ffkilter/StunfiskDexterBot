@@ -24,5 +24,12 @@ APPROVED_SUBMITTERS = [
    "migetno1",
    "0ffkilter",
    "bigyeIIowtaxi",
-   "DudeWynaut"
+   "DudeWynaut",
+   "cabforpitt",
+   "IsTheLieReallyaCake",
+   "FirestormXVI",
+   "RBGolbat",
+   "Foreverwerock",
+   "fennecin",
+   "xDactyl"
 ]
