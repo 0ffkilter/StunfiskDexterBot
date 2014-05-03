@@ -9,6 +9,7 @@ import sys
 import socket
 import string
 import HTMLParser
+import pprint
 from login import *
 from var_keys import *
 from aliases import *
