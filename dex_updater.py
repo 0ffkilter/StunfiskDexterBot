@@ -122,7 +122,7 @@ for c in my_comments:
 while (keep_on):
    # do stuff
    comments = None
-   comments = subreddit.get_comments()
+   comments = subreddit.get_comments(limit=100)
    pprint(comments)
    retrieved_count = 0
    new_time_mark = post_time_mark
