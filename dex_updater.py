@@ -124,13 +124,13 @@ while (keep_on):
    retrieved_count = 0
    new_time_mark = post_time_mark
    print ("Starting loop at " + time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime()) + " with post_time_mark of " + str(time.time() - post_time_mark) + " seconds in the past")
+   h = HTMLParser.HTMLParser()
    pokedex_index = {}
    pokedex_index["page"] = subreddit.get_wiki_page(page="pokedex")
    pokedex_index["content"] = h.unescape(pokedex_index["page"].content_md)
    edited_pages = {}
    try:
       for c in sorted(comments, key=lambda comment: comment.created_utc):
-         h = HTMLParser.HTMLParser()
          try:
             retrieved_count += 1
             # skip posts older than our previous "newest post" timestamp
