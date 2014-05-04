@@ -197,16 +197,16 @@ The /r/Stunfisk [Pokedex](http://www.reddit.com/r/{subreddit}/wiki/pokedex) has 
             print("Unicode error, continuing to next post")
             continue
 #   except (NameError, TypeError) as e:
-#      pprint.pprint(dir(e))
-#      pprint.pprint(vars(e))
+#      pprint(dir(e))
+#      pprint(vars(e))
 #      break
    except socket.timeout as e:
-      pprint.pprint(dir(e))
-      pprint.pprint(vars(e))
+      pprint(dir(e))
+      pprint(vars(e))
       print ("Timeout")
 #   except Exception as e:
-#      pprint.pprint(dir(e))
-#      pprint.pprint(vars(e))
+#      pprint(dir(e))
+#      pprint(vars(e))
 #      print "Main loop failed with an exception, delaying 5 minutes before retrying"
 #      time.sleep(300)
 
