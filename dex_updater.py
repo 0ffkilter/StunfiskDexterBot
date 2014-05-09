@@ -204,7 +204,7 @@ The /r/Stunfisk [Pokedex](http://www.reddit.com/r/{subreddit}/wiki/pokedex) has 
       pprint(dir(e))
       pprint(vars(e))
       print ("Timeout")
-  except Exception as e:
+   except Exception as e:
      pprint(dir(e))
      pprint(vars(e))
      print "Main loop failed with an exception, delaying 5 minutes before retrying"
