@@ -204,11 +204,11 @@ The /r/Stunfisk [Pokedex](http://www.reddit.com/r/{subreddit}/wiki/pokedex) has 
       pprint(dir(e))
       pprint(vars(e))
       print ("Timeout")
-#   except Exception as e:
-#      pprint(dir(e))
-#      pprint(vars(e))
-#      print "Main loop failed with an exception, delaying 5 minutes before retrying"
-#      time.sleep(300)
+  except Exception as e:
+     pprint(dir(e))
+     pprint(vars(e))
+     print "Main loop failed with an exception, delaying 5 minutes before retrying"
+     time.sleep(300)
 
    print (str(retrieved_count) + " submissions considered at " + time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime()))
    print (str(commented_count) + " submissions replied to so far this run")
