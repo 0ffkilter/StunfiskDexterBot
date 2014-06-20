@@ -216,8 +216,8 @@ The /r/Stunfisk [Pokedex](http://www.reddit.com/r/{subreddit}/wiki/pokedex) has 
    post_time_mark = new_time_mark
    print ("The new post_time_mark is " + str(post_time_mark))
 
-   # sleep for 30 min between refreshes of the same page request, per the API rules
+   # sleep for 15 min between refreshes of the same page request, per the API rules
    print ("sleeping")
-   time.sleep(1800)
+   time.sleep(900)
 
 
