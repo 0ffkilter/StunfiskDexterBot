@@ -773,6 +773,26 @@ NUMBER_TO_NAME = {
    772 : "garchomp-mega",
    773 : "lucario-mega",
    774 : "abomasnow-mega",
+   775 : "beedrill-mega",
+   776 : "pidgeot-mega",
+   777 : "slowbro-mega",
+   778 : "steelix-mega",
+   779 : "sceptile-mega",
+   780 : "swampert-mega",
+   781 : "sableye-mega",
+   782 : "sharpedo-mega",
+   783 : "camerupt-mega",
+   784 : "altaria-mega",
+   785 : "glalie-mega",
+   786 : "salamence-mega",
+   787 : "metagross-mega",
+   788 : "latias-mega",
+   789 : "latios-mega",
+   790 : "rayquaza-mega",
+   791 : "lopunny-mega",
+   792 : "gallade-mega",
+   793 : "audino-mega",
+   794 : "diancie-mega"
 };
 
 NAME_TO_NUMBER = {
@@ -1550,6 +1570,26 @@ NAME_TO_NUMBER = {
    "garchomp-mega" : 772,
    "lucario-mega" : 773,
    "abomasnow-mega" : 774,
+   "beedrill-mega" : 775,
+   "pidgeot-mega" : 776,
+   "slowbro-mega" : 777,
+   "steelix-mega" : 778,
+   "sceptile-mega" : 779,
+   "swampert-mega" : 780,
+   "sableye-mega" : 781,
+   "sharpedo-mega" : 782,
+   "camerupt-mega" : 783,
+   "altaria-mega" : 784,
+   "glalie-mega" : 785,
+   "salamence-mega" : 786,
+   "metagross-mega" : 787,
+   "latias-mega" : 788,
+   "latios-mega" : 789 ,
+   "rayquaza-mega" : 790,
+   "lopunny-mega" : 791 ,
+   "gallade-mega" : 792,
+   "audino-mega": 793,
+   "diancie-mega" : 794
 };
 
 NUMBER_TO_ITEM = {
