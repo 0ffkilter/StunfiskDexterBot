@@ -792,7 +792,8 @@ NUMBER_TO_NAME = {
    791 : "lopunny-mega",
    792 : "gallade-mega",
    793 : "audino-mega",
-   794 : "diancie-mega"
+   794 : "diancie-mega",
+   795 : "diancie"
 };
 
 NAME_TO_NUMBER = {
@@ -1589,7 +1590,8 @@ NAME_TO_NUMBER = {
    "lopunny-mega" : 791 ,
    "gallade-mega" : 792,
    "audino-mega": 793,
-   "diancie-mega" : 794
+   "diancie-mega" : 794,
+   "diancie" : 795
 };
 
 NUMBER_TO_ITEM = {
