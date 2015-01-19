@@ -19,12 +19,13 @@ from read_pokedex_json import POKEDEX
 from pprint import pprint
 from exception_handler import ExpHandler
 
+
 h = HTMLParser.HTMLParser()
 
 set_key = "##Sets\n\n##Nature"
 
 def has_set(content):
-    return set_key in content
+    return  not set_key in content
 
 def update_index(subreddit, subreddit_name):
    content ="""\
@@ -58,8 +59,88 @@ Pokémon|Type|Abilities|HP|Atk|Def|SpA|SpD|Spe|BST
          poke_content = h.unescape(poke_content)
          if has_set (poke_content):
              bold = "**"
+         else:
+             bold = ""
       except KeyboardInterrupt:
         sys.exit(0)
+      except urllib2.HTTPError as e:
+        if e.code == 404:
+            base_poke_content = """\
+#{species}
+##Introduction
+
+**Type**: {types}
+
+**Abilities**: {abilities}
+
+**Base stats**:
+
+* HP: {hp}
+* ATK: {atk}
+* DEF: {defence}
+* SPA: {spa}
+* SPD: {spd}
+* SPE: {spe}
+* TOTAL: {bst}
+
+##Sets
+
+##Nature
+
+To be completed - a section about the best natures for {species}.
+
+##Moves
+
+To be completed - a section about the best moves for {species}.
+
+##Strategy
+
+To be completed - a section about the best strategies for {species}.
+
+##Team mates
+
+To be completed - a section about the best team mates for {species}.
+
+##Checks and counters
+
+To be completed - a section about the checks and counters for {species}.
+
+##Move Requirements
+
+###Tutor Moves
+
+To be completed - a section about the tutor moves to be aware of while breeding.
+
+###Egg Moves
+
+To be completed - a section about the egg moves to be aware of while breeding.
+
+###Event Moves
+
+To be completed - a section about moves that can only be obtained through events.
+
+###Past Generation Moves
+
+To be completed - a section about moves that can only be obtained through past generations.
+
+##Conclusion
+
+To be completed: the conclusion
+
+"""
+            new_poke_content = base_poke_content.format(
+            species=POKEDEX[pokedex_index]["species"],
+            types=types,
+            abilities=abilities,
+            hp=base_stats["hp"],
+            atk=base_stats["atk"],
+            defence=base_stats["def"],
+            spa=base_stats["spa"],
+            spd=base_stats["spd"],
+            spe=base_stats["spe"],
+            bst=bst)
+            stunfisk.edit_wiki_page(page=stunfisk_dex_index, content=new_poke_content, reason="initializing page")
+            print("created page for %s" %stunfisk_dex_index)
       except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
