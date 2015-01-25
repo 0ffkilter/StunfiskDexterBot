@@ -31,5 +31,6 @@ APPROVED_SUBMITTERS = [
    "RBGolbat",
    "Foreverwerock",
    "fennecin",
-   "xDactyl"
+   "xDactyl",
+   "mrbdog46"
 ]
