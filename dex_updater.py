@@ -130,30 +130,43 @@ while (keep_on):
       pokedex_index["page"] = subreddit.get_wiki_page(page="pokedex")
       pokedex_index["content"] = h.unescape(pokedex_index["page"].content_md)
       edited_pages = {}
+
       for c in sorted(comments, key=lambda comment: comment.created_utc):
-         try:
+
+          try:
+
             retrieved_count += 1
+
             # skip posts older than our previous "newest post" timestamp
+
             if c.created_utc <= post_time_mark:
-               continue
+                continue
+
             if c.is_root:
                continue
-            if not approved_submitter(c.author.name):
-               continue
-            info = approving_post(c)
-            if not info:
-               continue
+
             parent_comment = r.get_info(thing_id=c.parent_id)
             parent_comment = r.get_submission(parent_comment.permalink).comments[0]
+
+            if not approved_submitter(c.author.name) or not (not approved_submitter(c.author.name) and (c.author.name is not parent_comment.author.name)):
+               continue
+
+            info = approving_post(c)
+
+            if not info:
+               continue
+
             info["permalink"] = parent_comment.permalink
+
             if already_replied(parent_comment, username):
                continue
+
             print ("We are currently considering a comment that is " + str(time.time() - parent_comment.created_utc) + " seconds old, from " + str(parent_comment.subreddit))
             text = parent_comment.body.encode('ascii', 'ignore')
             text = unicode(text)
             h = HTMLParser.HTMLParser()
             text = h.unescape(text)
-            print text
+            print (text)
             print ("We are now editing the Wiki page for " + info["species"])
             try:
                if not info["stunfisk_dex_index"] in edited_pages:
@@ -161,20 +174,23 @@ while (keep_on):
                   edited_pages[info["stunfisk_dex_index"]]["page"] = subreddit.get_wiki_page(page=info["stunfisk_dex_index"])
                   edited_pages[info["stunfisk_dex_index"]]["content"] = h.unescape(
                         edited_pages[info["stunfisk_dex_index"]]["page"].content_md)
-               add_set_to_page(edited_pages[info["stunfisk_dex_index"]], 
+                  add_set_to_page(edited_pages[info["stunfisk_dex_index"]],
                      info, text, parent_comment.author.name)
-               update_pokedex_index(pokedex_index, info["species"])
-               reply_text = """\
+                  update_pokedex_index(pokedex_index, info["species"])
+
+                  reply_text = """\
 The /r/Stunfisk [Pokedex](http://www.reddit.com/r/{subreddit}/wiki/pokedex) has been updated on the [{species}](http://www.reddit.com/r/{subreddit}/wiki/{stunfisk_dex_index}) page with the new set called {set_name}.
 
 *I am a bot that searches for comments with approved sets to put into the /r/Stunfisk [Pokedex](http://www.reddit.com/r/{subreddit}/wiki/pokedex).*
 """
                reply_text = reply_text.format(
-               subreddit=parent_comment.subreddit,
-               species=info['species'],
-               stunfisk_dex_index=info['stunfisk_dex_index'],
-               set_name=info['set_name'])
+                    subreddit=parent_comment.subreddit,
+                    species=info['species'],
+                    stunfisk_dex_index=info['stunfisk_dex_index'],
+                    set_name=info['set_name'])
+
                print ("We will now comment on this post...")
+
                numTries = 0
                while (numTries < 4):
                   try:
@@ -187,6 +203,7 @@ The /r/Stunfisk [Pokedex](http://www.reddit.com/r/{subreddit}/wiki/pokedex) has 
                      print ("Sleeping for 5 minutes and then trying again.")
                      time.sleep(300)
                      numTries += 1
+
                new_time_mark = c.created_utc
             except socket.timeout as e:
                print "We have failed to open or read the wiki page, so we're ignoring this comment."
